@@ -7,6 +7,12 @@
  * Course     : CPE 2600
  * Section    : 112
  * Assignment : Lab 9
+ * Algorithm  :
+ *  - Retrieve current process priority using getpriority()
+ *  - Decrease process priority by 10 using nice() (increase niceness)
+ *  - Confirm and display new priority
+ *  - Sleep for 1.837272638 seconds using nanosleep()
+ *  - Print completion message before exiting
  */
 
 
@@ -61,19 +67,29 @@ int main(int argc, char *argv[]) {
 // Helper: print file type
 void print_file_type(mode_t mode) {
     printf("File Type: ");
-    if (S_ISREG(mode))      printf("Regular File\n");
-    else if (S_ISDIR(mode)) printf("Directory\n");
-    else if (S_ISLNK(mode)) printf("Symbolic Link\n");
-    else if (S_ISCHR(mode)) printf("Character Device\n");
-    else if (S_ISBLK(mode)) printf("Block Device\n");
-    else if (S_ISFIFO(mode))printf("FIFO (Pipe)\n");
-    else if (S_ISSOCK(mode))printf("Socket\n");
-    else                    printf("Unknown\n");
+    if (S_ISREG(mode)){
+        printf("Regular File\n");
+    } else if (S_ISDIR(mode)) {
+        printf("Directory\n");
+    } else if (S_ISLNK(mode)) {
+        printf("Symbolic Link\n");
+    } else if (S_ISCHR(mode)) {
+        printf("Character Device\n");
+    } else if (S_ISBLK(mode)) {
+        printf("Block Device\n");
+    } else if (S_ISFIFO(mode)) {
+        printf("FIFO (Pipe)\n");
+    } else if (S_ISSOCK(mode)) {
+        printf("Socket\n");
+    } else {
+        printf("Unknown\n");
+    }                 
 }
 
 // Helper: print permissions like rwxr-xr--
 void print_permissions(mode_t mode) {
     char perms[10];
+    // Make use of ternary operators for simplicity
     perms[0] = (mode & S_IRUSR) ? 'r' : '-';
     perms[1] = (mode & S_IWUSR) ? 'w' : '-';
     perms[2] = (mode & S_IXUSR) ? 'x' : '-';

@@ -8,6 +8,13 @@
  * Course     : CPE 2600
  * Section    : 112
  * Assignment : Lab 9
+ * Algorithm  :
+ *  - Get and print current system time using clock_gettime()
+ *  - Retrieve and print hostname
+ *  - Retrieve and print OS info with uname()
+ *  - Print number of CPUs with get_nprocs()
+ *  - Print memory info with sysinfo()
+ *  - Print page size with getpagesize()
  */
 
 // automatically includes the POSIX functions
@@ -25,7 +32,8 @@ int main(void)
 {
     struct timespec t;
     clock_gettime(CLOCK_REALTIME, &t);
-    printf("1. Current time of day       : %ld.%09ld seconds (nanosecond precision)\n",
+    printf("1. Current time of day       : %ld.%09ld seconds"
+            "(nanosecond precision)\n",
            (long)t.tv_sec, (long)t.tv_nsec);
 
     char hostname[256];

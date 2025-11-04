@@ -7,6 +7,12 @@
  * Course     : CPE 2600
  * Section    : 112
  * Assignment : Lab 9
+ * Algorithm  :
+ *  - Retrieve current process priority using getpriority()
+ *  - Decrease process priority by 10 using nice() (increase niceness)
+ *  - Confirm and display new priority
+ *  - Sleep for 1.837272638 seconds using nanosleep()
+ *  - Print completion message before exiting
  */
 
 #define _GNU_SOURCE

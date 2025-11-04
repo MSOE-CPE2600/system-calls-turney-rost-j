@@ -7,6 +7,12 @@
  * Course     : CPE 2600
  * Section    : 112
  * Assignment : Lab 9
+ * Algorithm  :
+ *  - Check if a PID is provided on the command line
+ *      - If none is provided, use the current process ID
+ *  - Retrieve the process's scheduling policy using sched_getscheduler()
+ *  - Retrieve the process priority using getpriority()
+ *  - Display the PID, priority, and human-readable scheduling
  */
 
 #define _GNU_SOURCE
@@ -53,16 +59,34 @@ int main(int argc, char *argv[]) {
     printf("Scheduling Policy : ");
 
     switch (policy) {
-        case SCHED_OTHER:   printf("SCHED_OTHER (Normal)\n"); break;
-        case SCHED_FIFO:    printf("SCHED_FIFO (Real-time, FIFO)\n"); break;
-        case SCHED_RR:      printf("SCHED_RR (Real-time, Round Robin)\n"); break;
+        case SCHED_OTHER:   
+            printf("SCHED_OTHER (Normal)\n"); 
+            break;
+        case SCHED_FIFO:    
+            printf("SCHED_FIFO (Real-time, FIFO)\n"); 
+            break;
+        case SCHED_RR:      
+            printf("SCHED_RR (Real-time, Round Robin)\n"); 
+            break;
+// SCHED_BATCH is a Linux-specific scheduling policy.
+// This case is conditionally compiled only if SCHED_BATCH is defined
+// to ensure portability on systems that do not support it.
 #ifdef SCHED_BATCH
-        case SCHED_BATCH:   printf("SCHED_BATCH (Batch)\n"); break;
+        case SCHED_BATCH:   
+            printf("SCHED_BATCH (Batch)\n"); 
+            break;
 #endif
+// SCHED_IDLE is also a Linux-specific scheduling policy.
+// Guarded with #ifdef to prevent compilation errors on non-Linux systems
+// where this constant may not exist.
 #ifdef SCHED_IDLE
-        case SCHED_IDLE:    printf("SCHED_IDLE (Idle)\n"); break;
+        case SCHED_IDLE:    
+            printf("SCHED_IDLE (Idle)\n"); 
+            break;
 #endif
-        default:            printf("Unknown Policy (%d)\n", policy); break;
+        default:            
+            printf("Unknown Policy (%d)\n", policy); 
+            break;
     }
 
     return EXIT_SUCCESS;
